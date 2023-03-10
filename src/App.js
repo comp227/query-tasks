@@ -1,28 +1,28 @@
 const App = () => {
-  const addNote = async (event) => {
+  const addTask = async (event) => {
     event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
+    const content = event.target.task.value
+    event.target.task.value = ''
     console.log(content)
   }
 
-  const toggleImportance = (note) => {
-    console.log('toggle importance of', note.id)
+  const toggleImportance = (task) => {
+    console.log('toggle importance of', task.id)
   }
 
-  const notes = []
+  const task = []
 
   return(
     <div>
-      <h2>Notes app</h2>
-      <form onSubmit={addNote}>
-        <input name="note" />
+      <h2>Tasks app</h2>
+      <form onSubmit={addTask}>
+        <input name="task" />
         <button type="submit">add</button>
       </form>
-      {notes.map(note =>
-        <li key={note.id} onClick={() => toggleImportance(note)}>
-          {note.content} 
-          <strong> {note.important ? 'important' : ''}</strong>
+      {task.map(task =>
+        <li key={task.id} onClick={() => toggleImportance(task)}>
+          {task.content}
+          <strong> {task.important ? 'important' : ''}</strong>
         </li>
       )}
     </div>
