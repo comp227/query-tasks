@@ -22,7 +22,7 @@ const App = () => {
       {tasks.map(task =>
         <li key={task.id} onClick={() => toggleImportance(task)}>
           {task.content}
-          <strong> {task.important ? 'important' : ''}</strong>
+          <strong> {task.important ? '- important' : ''}</strong>
         </li>
       )}
     </div>
