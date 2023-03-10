@@ -10,7 +10,7 @@ const App = () => {
     console.log('toggle importance of', task.id)
   }
 
-  const task = []
+  const tasks = []
 
   return(
     <div>
@@ -19,7 +19,7 @@ const App = () => {
         <input name="task" />
         <button type="submit">add</button>
       </form>
-      {task.map(task =>
+      {tasks.map(task =>
         <li key={task.id} onClick={() => toggleImportance(task)}>
           {task.content}
           <strong> {task.important ? 'important' : ''}</strong>
