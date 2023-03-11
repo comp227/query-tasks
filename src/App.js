@@ -28,7 +28,9 @@ const App = () => {
     updateTaskMutation.mutate({...task, important: !task.important })
   }
 
-  const result = useQuery('tasks', getTasks)
+  const result = useQuery('tasks', getTasks, {
+    refetchOnWindowFocus: false
+  })
 
   console.log(result)
 
