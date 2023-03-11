@@ -1,5 +1,5 @@
 import {useQuery, useMutation, useQueryClient} from "react-query";
-import {getTasks, createTask} from "./requests";
+import {getTasks, createTask, updateTask} from "./requests";
 
 const App = () => {
   const queryClient = useQueryClient()
@@ -10,6 +10,12 @@ const App = () => {
     }
   })
 
+  const updateTaskMutation = useMutation(updateTask, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('tasks')
+    },
+  })
+
   const addTask = async (event) => {
     event.preventDefault()
     const content = event.target.task.value
@@ -18,7 +24,7 @@ const App = () => {
   }
 
   const toggleImportance = (task) => {
-    console.log('toggle importance of', task.id)
+    updateTaskMutation.mutate({...task, important: !task.important })
   }
 
   const result = useQuery('tasks', getTasks)

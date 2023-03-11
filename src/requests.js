@@ -7,3 +7,6 @@ export const getTasks = () =>
 
 export const createTask = newTask =>
     axios.post(baseUrl, newTask).then(res => res.data)
+
+export const updateTask = updatedTask =>
+    axios.put(`${baseUrl}/${updatedTask.id}`, updatedTask).then(res => res.data)
