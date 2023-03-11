@@ -1,3 +1,6 @@
+import {useQuery} from "react-query";
+import axios from "axios";
+
 const App = () => {
   const addTask = async (event) => {
     event.preventDefault()
@@ -10,7 +13,18 @@ const App = () => {
     console.log('toggle importance of', task.id)
   }
 
-  const tasks = []
+  const result = useQuery(
+      'tasks',
+      () => axios.get('http://localhost:3001/tasks').then(res => res.data)
+  )
+
+  console.log(result)
+
+  if (result.isLoading) {
+    return <div>loading data...</div>
+  }
+
+  const tasks = result.data
 
   return(
     <div>
