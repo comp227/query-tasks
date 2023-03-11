@@ -1,12 +1,14 @@
-import {useQuery} from "react-query";
-import {getTasks} from "./requests";
+import {useQuery, useMutation} from "react-query";
+import {getTasks, createTask} from "./requests";
 
 const App = () => {
+  const newTaskMutation = useMutation(createTask)
+
   const addTask = async (event) => {
     event.preventDefault()
     const content = event.target.task.value
     event.target.task.value = ''
-    console.log(content)
+    newTaskMutation.mutate({content, important: true})
   }
 
   const toggleImportance = (task) => {
