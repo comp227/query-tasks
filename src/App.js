@@ -5,8 +5,9 @@ const App = () => {
   const queryClient = useQueryClient()
 
   const newTaskMutation = useMutation(createTask, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('tasks')
+    onSuccess: (newTask) => {
+      const tasks = queryClient.getQueryData('tasks')
+      queryClient.setQueryData('tasks', tasks.concat(newTask))
     }
   })
 
