@@ -1,8 +1,14 @@
-import {useQuery, useMutation} from "react-query";
+import {useQuery, useMutation, useQueryClient} from "react-query";
 import {getTasks, createTask} from "./requests";
 
 const App = () => {
-  const newTaskMutation = useMutation(createTask)
+  const queryClient = useQueryClient()
+
+  const newTaskMutation = useMutation(createTask, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('tasks')
+    }
+  })
 
   const addTask = async (event) => {
     event.preventDefault()
