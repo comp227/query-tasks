@@ -1,5 +1,5 @@
 import {useQuery} from "react-query";
-import axios from "axios";
+import {getTasks} from "./requests";
 
 const App = () => {
   const addTask = async (event) => {
@@ -13,10 +13,7 @@ const App = () => {
     console.log('toggle importance of', task.id)
   }
 
-  const result = useQuery(
-      'tasks',
-      () => axios.get('http://localhost:3001/tasks').then(res => res.data)
-  )
+  const result = useQuery('tasks', getTasks)
 
   console.log(result)
 
